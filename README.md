@@ -44,4 +44,4 @@
 | FONT          | [JetBrainsMono](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip)| Best Font :) |
 
 # Keybindings
-See [Keybindings](./keybindings.md)
+See [Keybindings](./mangos/keybindings.md)
