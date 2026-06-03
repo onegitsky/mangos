@@ -1,0 +1,6 @@
+@define-color background {background};
+@define-color foreground {foreground};
+
+@define-color accent {color1};
+@define-color accent-light {color4};
+@define-color accent-hover {color5};

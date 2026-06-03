@@ -1,0 +1,77 @@
+@import "~/.cache/wal/colors-rofi.rasi"
+
+configuration {
+    modi:                       "drun";
+    show-icons:                 true;
+    drun-display-format:        "{name}";
+    monitor:                    "DP-1";
+}
+* {
+    font:           "JetBrains Mono NerdFont 10";
+}
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       600px;
+    height:                      504px;
+    border:                      1px solid;
+    border-color:                @selected;
+    border-radius:               5px;
+    cursor:                      "text";
+    background-color:            @background;
+}
+mainbox {
+    enabled:                     true;
+    padding:                     12px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "listview" ]; /* Removed inputbar from children */
+}
+dummy {
+    background-color:            transparent;
+}
+listview {
+    enabled:                     true;
+    columns:                     3;
+    lines:                       3;
+    cycle:                       true;
+    layout:                      vertical;
+    spacing:                     5px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+element {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element-icon {
+    location:                    center;
+    size:                        166px;
+    background-color:            transparent;
+    padding:                     -5px 10px -5px 10px; 
+    border-radius:               0px;
+}
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+element selected.active {
+    background-color:            @urgent;
+    text-color:                  @background;
+}
+element selected.urgent {
+    background-color:            @active;
+    text-color:                  @background;
+}
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  #000000ff;
+    border-radius:               5px;
+}

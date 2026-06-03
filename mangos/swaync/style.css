@@ -1,0 +1,136 @@
+@import url("/home/YOURUSERNAME!/.cache/wal/colors-swaync.css");
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+animatedlistitem {
+    margin: 0px;
+    padding: 0px
+}
+
+scrollbar {
+    opacity: 0;
+    min-width: 0;
+    min-height: 0;
+}
+
+.notification-row {
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+}
+
+.notification {
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
+    background: @background;
+}
+
+.notification-background {
+    padding: 2px;
+    box-shadow: inset 2px 0 @accent;
+}
+
+.notification-group-icon {
+    -gtk-icon-transform: scale(0);
+}
+
+.notification-group-header,
+.notification-group {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.notification-content {
+    border-radius: 0px;
+    padding: 5px;
+}
+
+.summary {
+    font-weight: bold;
+}
+
+.bold {
+    font-size: 11px;
+}
+
+.time {
+    font-size: 11px;
+}
+
+.app-name {
+    font-size: 11px;
+}
+
+.control-center-dnd {
+    background: alpha(@accent), 0.3);
+}
+
+.control-center-dnd:hover {
+    background: alpha(@accent), 0.725);
+}
+
+.control-center-dnd:checked {
+    background: @accent;
+}
+
+.control-center-dnd slider {
+    background: #ebebeb;
+}
+
+.control-center {
+    background: alpha(@background, 0.85);
+    border-radius: 0px;
+}
+
+.control-center-list {
+    background: transparent;
+}
+
+button.circular {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+button.circular:hover {
+    background: alpha(@accent-hover), 0.725);
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.widget-title {
+    color: @foreground;
+    font-weight: bold;
+}
+
+.widget-title button {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    color: @foreground;
+}
+
+.widget-title button:hover {
+    background: alpha(@accent-hover), 0.3);
+    border-radius: 0px;
+    border: none;
+    box-shadow: none;
+}
+
+.notification-default-action {
+    border-radius: 0px;
+    padding: 8px;
+}
+
+.notification-default-action:hover {
+    background: alpha(@accent-hover), 0.3);
+    border-radius: 0px;
+}

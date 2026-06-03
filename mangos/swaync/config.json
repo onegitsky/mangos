@@ -1,0 +1,32 @@
+{
+    "$schema": "/etc/xdg/swaync/configSchema.json",
+
+    "positionX": "left",
+    "positionY": "bottom",
+
+    "control-center-positionX": "right",
+    "control-center-positionY": "top",
+
+    "cssPriority": "user",
+
+    "control-center-width": 420,
+    "notification-window-width": 360,
+    "notification-window-height": 150,
+
+    "control-center-margin-top": 0,
+    "control-center-margin-right": 0,
+
+    "timeout": 3,
+    "timeout-low": 3,
+    "timeout-critical": 10,
+
+    "keyboard-shortcuts": true,
+
+    "image-visibility": "when-available",
+
+    "fit-to-screen": true,
+    "hide-on-action": true,
+    "hide-on-clear": false,
+
+    "notification-2fa-action": false
+}

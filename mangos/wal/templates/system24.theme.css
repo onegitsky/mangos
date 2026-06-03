@@ -1,0 +1,151 @@
+@import url("https://refact0r.github.io/system24/build/system24.css");
+
+body {
+    --font: 'JetBrainsMono';
+    --code-font: 'DM Mono';
+    font-weight: 300;
+    letter-spacing: -0.05ch;
+
+    --gap: 12px;
+    --divider-thickness: 4px;
+    --border-thickness: 2px;
+    --border-hover-transition: 0.2s ease;
+    --animations: on;
+    --list-item-transition: 0.2s ease;
+    --dms-icon-svg-transition: 0.4s ease;
+    --top-bar-height: var(--gap);
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: off;
+    --subtle-top-bar-title: off;
+    --custom-window-controls: off;
+    --window-control-size: 14px;
+    --custom-dms-icon: off;
+    --dms-icon-svg-url: url('');
+    --dms-icon-svg-size: 90%;
+    --dms-icon-color-before: var(--icon-secondary);
+    --dms-icon-color-after: var(--white);
+    --custom-dms-background: off;
+    --dms-background-image-url: url('');
+    --dms-background-image-size: cover;
+    --dms-background-color: linear-gradient(
+        70deg,
+        {color4},
+        {color5},
+        {color6}
+    );
+    --background-image: off;
+    --background-image-url: url('');
+    --transparency-tweaks: off;
+    --remove-bg-layer: off;
+    --panel-blur: off;
+    --blur-amount: 12px;
+    --bg-floating: var(--bg-3);
+    --small-user-panel: on;
+    --unrounding: on;
+    --custom-spotify-bar: on;
+    --ascii-titles: on;
+    --ascii-loader: system24;
+    --panel-labels: on;
+    --label-color: var(--text-muted);
+    --label-font-weight: 500;
+}
+
+:root {
+    --colors: on;
+
+    --text-0: {background};
+    --text-1: {foreground};
+    --text-2: {foreground};
+    --text-3: {color7};
+    --text-4: {color15};
+    --text-5: {color8};
+
+    --bg-1: {background};
+    --bg-2: {color0};
+    --bg-3: {color0};
+    --bg-4: {background};
+
+    --hover: {color0};
+
+    --active: color-mix(in srgb, {color4} 15%, transparent);
+    --active-2: color-mix(in srgb, {color4} 30%, transparent);
+
+    --message-hover: var(--hover);
+
+    --accent-1: {color4};
+    --accent-2: {color4};
+    --accent-3: {color12};
+    --accent-4: {color6};
+    --accent-5: {color14};
+
+    --accent-new: var(--accent-2);
+
+    --online: {color2};
+    --dnd: {color1};
+    --idle: {color3};
+    --streaming: {color5};
+    --offline: {color8};
+
+    --border-light: {color8};
+    --border: {color0};
+    --border-hover: {color4};
+    --button-border: {color0};
+
+    --red-1: {color9};
+    --red-2: {color1};
+    --red-3: {color9};
+    --red-4: {color1};
+    --red-5: {color1};
+
+    --green-1: {color10};
+    --green-2: {color2};
+    --green-3: {color10};
+    --green-4: {color2};
+    --green-5: {color2};
+
+    --blue-1: {color12};
+    --blue-2: {color4};
+    --blue-3: {color12};
+    --blue-4: {color4};
+    --blue-5: {color4};
+
+    --yellow-1: {color11};
+    --yellow-2: {color3};
+    --yellow-3: {color11};
+    --yellow-4: {color3};
+    --yellow-5: {color3};
+
+    --purple-1: {color13};
+    --purple-2: {color5};
+    --purple-3: {color13};
+    --purple-4: {color5};
+    --purple-5: {color5};
+}
+
+[class*="avatar_"],
+.circularImage__1ce5d,
+.avatar__75742,
+.overlay__75742::after,
+.avatar_f75fb0 img,
+.avatar__20a53 img {
+    border-radius: 50% !important;
+}
+[aria-label="Send a gift"],
+[aria-label="Apps"],
+[aria-label="Start an Activity"],
+[aria-label="Discover"] {
+    pointer-events: none !important;
+    display: none !important;
+}
+/* Doesn't work because Discord will change the UID every so often.
+[data-list-item-id="private-channels-uid_939___nitro"] {
+    pointer-events: none !important;
+    display: none !important;
+}
+[data-list-item-id="private-channels-uid_939___shop"] {
+    pointer-events: none !important;
+    display: none !important;
+}*/
+.sectionDivider__35e86 {
+    margin-top: 5px !important;
+}

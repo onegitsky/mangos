@@ -1,0 +1,102 @@
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=white
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=white
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=#ce7488
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#60728a,bold,underline"
+zle_highlight=('paste:none')
+
+autoload -U compinit
+autoload -U colors && colors
+zstyle ':completion*' menu select
+zstyle ':completion*' list-colors ${(s.:.)LS_COLORS} ex=32 di=37 ma=30\;100
+zstyle ':completion*' squeeze-slashes false
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
+local reset="%{$reset_color%}"
+gray1="#151515"
+gray2="#101010"
+text_dark="#aaaaaa"
+cur_main1=$gray1
+cur_main2=$gray2
+cur_text=$text_dark
+
+sign=">"
+
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Edit command in vim
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+setopt correct
+setopt nocheckjobs
+setopt append_history
+setopt inc_append_history
+setopt share_history
+setopt auto_menu
+setopt menu_complete
+setopt autocd
+setopt nobeep
+setopt auto_param_slash
+setopt globdots
+setopt PROMPT_SUBST
+unsetopt prompt_sp
+
+# Keep autosuggestion history
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt EXTENDED_HISTORY
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000000
+HISTSIZE=1000000
+HISTCONTROL=ignoreboth
+
+source <(fzf --zsh)
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+export AUTO_NOTIFY_TITLE="'%command'"
+export AUTO_NOTIFY_BODY="Time: %elapsed seconds"
+export MPD_HOST="$HOME/.config/mpd/socket"
+alias cat="bat"
+alias ll="ls -l"
+alias la="ls -aF"
+alias v='nvim'
+alias sv='sudo -E nvim'
+alias y='yazi'
+alias sy='sudo -E yazi'
+alias clock='tty-clock -s -c -C 4 -b -t'
+alias pipes.sh='pipes.sh -R -b -p 8 -r 3500'
+alias alarm='~/.local/bin/time-toolkit/time-toolkit.sh'
+alias genpass='python3 ~/.local/bin/genpass.py'
+alias rain='~/.local/bin/terminal_rain_lightning.py'
+
+# Ignore empty command
+zsh-noprompt() {
+    if [[ -z $BUFFER ]]; then
+        return 1
+    fi
+    zle accept-line
+}
+zle -N zsh-noprompt
+bindkey '^M' zsh-noprompt
+
+precmd() {
+    print ""
+}
+
+PROMPT="%K{$cur_main1}%F{$cur_text} %m %K{$cur_main2}%F{$cur_text} %~ %f%k ${sign} "
+RPROMPT="%F{$cur_text}[$(date +%I:%M%p)]${reset}"
+
+okm-32
+
+# Plugins Via Source
+source /usr/share/zsh/plugins/zsh-auto-notify/auto-notify.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /usr/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
