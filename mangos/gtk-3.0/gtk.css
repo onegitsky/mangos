@@ -1,0 +1,22 @@
+@import url("/usr/share/themes/Material-Black-Lain/gtk-4.0/gtk.css");
+
+menu,
+.menu,
+.context-menu {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.background.popup {
+    background-color: transparent;
+}
+
+decoration,
+.popup decoration,
+.csd.popup decoration {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
