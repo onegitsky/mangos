@@ -1,0 +1,20 @@
+/* ~/.config/swayosd/style.css */
+@import url("/home/YOUR_USERNAME/.cache/wal/colors-waybar.css");
+
+window {
+    background-color: alpha(@background, 0.77);
+    border-radius: 0px;
+}
+progressbar trough {
+    background: transparent;
+}
+progressbar progress {
+    background: @color1;
+}
+label {
+    color: @foreground;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
