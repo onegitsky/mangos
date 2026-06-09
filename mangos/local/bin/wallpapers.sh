@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+THUMB_DIR="$HOME/.cache/wall-thumbs"
+mkdir -p "$THUMB_DIR"
+
+generate_thumb() {
+    local img="$1"
+
+    local hash
+    hash=$(printf '%s' "$img" | md5sum | cut -d' ' -f1)
+
+    local thumb="$THUMB_DIR/${hash}.png"
+
+    if [[ ! -f "$thumb" || "$img" -nt "$thumb" ]]; then
+        magick "$img" \
+            -thumbnail 128x128^ \
+            -gravity center \
+            -extent 128x128 \
+            "$thumb"
+    fi
+
+    printf '%s\n' "$thumb"
+}
+
 WALL_DIR="$HOME/Pictures/Wallpapers/swww/"
 
 mapfile -t WALLPAPERS < <(
@@ -14,7 +36,9 @@ for ((i=0; i<${#WALLPAPERS[@]}; i++)); do
     file="${WALLPAPERS[$i]}"
     filename=$(basename "$file")
 
-    entry="$filename\0icon\x1fthumbnail://$file"
+    thumb=$(generate_thumb "$file")
+
+    entry="$filename\0icon\x1f$thumb"
 
     if [ $i -eq 0 ]; then
         rofi_input="$entry"
@@ -66,6 +90,9 @@ pkill -SIGUSR2 waybar
 swaync-client --reload-css
 
 killall -SIGUSR1 foot
+
+pkill swayosd-server
+swayosd-server >/dev/null 2>&1 &
 
 notify-send \
     "Theme Changed" \
