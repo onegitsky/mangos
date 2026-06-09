@@ -62,7 +62,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export AUTO_NOTIFY_TITLE="'%command'"
 export AUTO_NOTIFY_BODY="Time: %elapsed seconds"
-export MPD_HOST="$HOME/.config/mpd/socket"
+export MPD_HOST=/run/user/1000/mpd/socket
 alias cat="bat"
 alias ll="ls -l"
 alias la="ls -aF"
@@ -98,5 +98,4 @@ okm-32
 # Plugins Via Source
 source /usr/share/zsh/plugins/zsh-auto-notify/auto-notify.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source /usr/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
