@@ -3,7 +3,7 @@
 
 TITLE="Music Search"
 MUSIC_DIR="/games/Music"
-MPD_SOCKET="$HOME/.config/mpd/socket"
+MPD_SOCKET="/run/user/1000/mpd/socket"
 
 foot --title "$TITLE" bash -c '
     export MPD_HOST="'$MPD_SOCKET'"
@@ -59,14 +59,22 @@ foot --title "$TITLE" bash -c '
 
         if [[ "$KEY" == "ctrl-q" ]]; then
             # Queue the song
-            if quodlibet --enqueue="$FULL_PATH" 2>/dev/null; then
+            SONG_PATH=$(echo "$SELECTION" | cut -f2)
+
+            if mpc add "$SONG_PATH" >/dev/null 2>&1; then
                 notify-send -i "$COVER" "Added to Queue" "$DISPLAY_NAME"
             else
                 notify-send "Error" "Failed to add to queue"
             fi
         else
-            # Play immediately (Enter)
-            if quodlibet --play-file="$FULL_PATH" 2>/dev/null; then
+            # Play immediately (Enter) without destroying queue
+            SONG_PATH=$(echo "$SELECTION" | cut -f2)
+
+            POS=$(mpc playlist | wc -l)
+
+            if mpc add "$SONG_PATH" >/dev/null 2>&1 &&
+               mpc play $((POS + 1)) >/dev/null 2>&1; then
+
                 if [ -f "$COVER" ]; then
                     notify-send -i "$COVER" "Now Playing" "$DISPLAY_NAME"
                 else
