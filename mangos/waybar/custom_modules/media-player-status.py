@@ -19,7 +19,7 @@ def get_wal_color():
 
         return colors[4]
     except Exception:
-        return "#e17d94"  # fallback
+        return "#e17d94"
 
 ICON_COLOR = get_wal_color()
 
@@ -48,7 +48,7 @@ def get_status(manager, vanished_player, target_player=None):
     title = metadata[TITLE] if TITLE in metadata.keys() else None
     artist = metadata[ARTIST][0] if ARTIST in metadata.keys() else None
     
-    if name == 'quodlibet' and title == '' and artist == '':
+    if name == 'mpd' and title == '' and artist == '':
         title = artist = None
     
     css_class = 'paused' if player.props.playback_status == Playerctl.PlaybackStatus.PAUSED else 'playing'
