@@ -1,32 +1,65 @@
 {
     "$schema": "/etc/xdg/swaync/configSchema.json",
-
     "positionX": "left",
     "positionY": "bottom",
-
     "control-center-positionX": "right",
     "control-center-positionY": "top",
-
     "cssPriority": "user",
-
+    "layer": "overlay",
+    "layer-shell": true,
+    "control-center-layer": "top",
     "control-center-width": 420,
+    "control-center-height": 550,
     "notification-window-width": 360,
     "notification-window-height": 150,
-
     "control-center-margin-top": 0,
     "control-center-margin-right": 0,
-
     "timeout": 3,
     "timeout-low": 3,
     "timeout-critical": 10,
-
     "keyboard-shortcuts": true,
-
     "image-visibility": "when-available",
-
-    "fit-to-screen": true,
+    "text-empty": "you're lonely",
+    "fit-to-screen": false,
     "hide-on-action": true,
     "hide-on-clear": false,
+    "notification-2fa-action": false,
 
-    "notification-2fa-action": false
+"widgets": [
+    "title",
+    "dnd",
+    "buttons-grid",
+    "notifications"
+],
+
+"widget-config": {
+    "title": {
+            "text": "通知センター",
+            "clear-all-button": true,
+            "button-text": "󱏫"
+        },
+    "dnd": {
+            "text": "おやすみモード"
+        },
+    "buttons-grid": {
+        "actions": [
+            {
+                "label": "󰔟",
+                "command": "foot --title=alarm -e ~/.local/bin/time-toolkit/alarm/alarm.sh"
+            },
+            {
+                "label": "󰟵",
+                "command": "~/.local/bin/genpass.py"
+            },
+            {
+                "label": "󰚰",
+                "command": "~/.local/bin/update/updates.sh"
+            },
+            {
+                "label": "󰸉",
+                "command": "~/.local/bin/next-wallpaper.sh"
+                }
+            ]
+        }
+    }
 }
