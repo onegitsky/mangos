@@ -1,4 +1,4 @@
-@import url("/home/YOURUSERNAME!/.cache/wal/colors-waybar.css");
+@import url("/home/YOUR_USERNAME/.cache/wal/colors-waybar.css");
 
 @keyframes blink-warning {
     70% {
@@ -120,13 +120,16 @@
     margin-left: -3px;
 }
 #tray menu {
-    background-color: alpha(@background, 0.95);
-    color: #c0c8d8;
+    background-color: alpha(@background, 0.77);
+    color: #ebebeb;
     font-size: 12px;
+    border: none;
+    box-shadow: none;
 }
 #tray menu menuitem:hover {
     color: #000;
-    background-color: rgba(50, 64, 120, 0.725);
+    background-color: alpha(@color4, 0.77);
+    box-shadow: none;
 }
 #window {
     font-size: 11px;
