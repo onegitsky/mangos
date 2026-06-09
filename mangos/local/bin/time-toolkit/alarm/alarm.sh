@@ -8,6 +8,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 WHITE='\033[37m'
 
+ALARM_GAIN=-15
 DEFAULT_ALARM_FILE="$HOME/.local/bin/time-toolkit/alarm/tones/alarm.mp3"
 ALARM_FILE="${ALARM_FILE:-$DEFAULT_ALARM_FILE}"
 EXIT_SUCCESS=0
@@ -113,8 +114,8 @@ done
 
 stty sane
 clear
-echo -e "${YELLOW} 󰹱 Alarm going off,${GREEN} playing: ${NC}${DEFAULT_ALARM_FILE}"
-mplayer -loop 0 "$ALARM_FILE" >/dev/null 2>&1 &
+echo -e "${YELLOW} 󰹱 Alarm going off,${GREEN} playing: ${NC}$(basename "$ALARM_FILE")"
+mplayer -af volume=$ALARM_GAIN -loop 0 "$ALARM_FILE" >/dev/null 2>&1 &
 mplayer_pid=$!
 
 notify-send -a "Alarm" -u normal -t 3000 "Your reminder is now active!"
