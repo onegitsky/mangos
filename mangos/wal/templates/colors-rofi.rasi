@@ -1,5 +1,6 @@
 * {
-    background: {background};
+    background: {background}C4;
+    background-entry: {background}40;
     background-alt: {color0};
     foreground: {foreground};
 
