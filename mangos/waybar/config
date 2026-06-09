@@ -5,24 +5,23 @@
     "height": 21,
     "modules-left": ["ext/workspaces","custom/playerctl"],
     "modules-center": ["dwl/window"],
-    "modules-right": ["pulseaudio","clock#time","custom/notification","tray",],
+    "modules-right": ["pulseaudio","clock#time","custom/notification","tray"],
     
-    // Modules configuration
     "ext/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10",
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十",
             "urgent": "",
             "default": ""
         }
@@ -38,10 +37,10 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "󰂚",
-            "none": "",
-            "dnd-notification": "󰂚",
-            "dnd-none": ""
+            "notification": "",
+            "none": "",
+            "dnd-notification": "",
+            "dnd-none": ""
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -58,7 +57,7 @@
         "format": "{:%H:%M}",
         "tooltip": false,
         "on-click": "foot --title calcurse -c ~/.config/foot/foot.ini -e calcurse",
-        "on-click-middle": "~/.local/bin/waybar-scripts/cleartrash.sh"
+        "on-click-right": "foot --title weather -c ~/.config/foot/foot.ini -e sh -c 'curl wttr.in; echo; read -n 1 -s -r -p \"Press any key to close\"'"
     },
     "pulseaudio": {
         "scroll-step": 5,
@@ -73,16 +72,16 @@
         "on-click-middle": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
         "on-click": "foot --title pulsemixer -c ~/.config/foot/foot.ini -e pulsemixer",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/playerctl": {
-        "exec": "~/.config/waybar/custom_modules/media-player-status.py --player=quodlibet",
+        "exec": "~/.config/waybar/custom_modules/media-player-status.py --player=mpd",
         "return-type": "json",
-        "on-click": "playerctl -p quodlibet play-pause",
-        "on-click-middle": "~/.local/bin/waybar-scripts/spot-skip.py && playerctl -p quodlibet next",
+        "on-click": "playerctl -p mpd play-pause",
+        "on-click-middle": "~/.local/bin/waybar-scripts/spot-skip.py && playerctl -p mpd next",
         "on-click-right": "~/.local/bin/waybar-scripts/fzf-search.sh",
-        "on-scroll-up": "playerctl -p quodlibet volume 0.1+",
-        "on-scroll-down": "playerctl -p quodlibet volume 0.1-",
-        "tooltip": false,
+        "on-scroll-up": "~/.local/bin/waybar-scripts/mpd-volume.sh up",
+        "on-scroll-down": "~/.local/bin/waybar-scripts/mpd-volume.sh down",
+        "tooltip": false
     }
 }
