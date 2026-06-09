@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
-# Dependencies: playerctl (required), curl (for remote art), ImageMagick (for cropping)
-
 set -Eeuo pipefail
-
-PREFERRED_PLAYERS="quodlibet"
+PREFERRED_PLAYERS="mpd"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/hyprlock-art"
 SQUARE_SIZE=1024
 mkdir -p "$CACHE_DIR"
-
 BAR_LENGTH=16
 BAR_CHAR="━"
 BAR_HANDLE="⦿"
@@ -23,8 +19,6 @@ select_player() {
     echo ""
   fi
 }
-
-# Get metadata from active player
 get_metadata() {
   local key="$1"
   local fmt="{{ $key }}"
@@ -37,8 +31,6 @@ get_metadata() {
     playerctl metadata --format "$fmt" 2>/dev/null || true
   fi
 }
-
-# Get player status (Playing/Paused/Stopped)
 get_status() {
   local player
   player="$(select_player)"
@@ -49,7 +41,6 @@ get_status() {
     playerctl status 2>/dev/null || true
   fi
 }
-
 trim_string() {
   local str="${1:-}"
   local max_len="${2:-30}"
@@ -61,8 +52,6 @@ trim_string() {
     printf '%s…' "${str:0:max_len}"
   fi
 }
-
-# Convert microseconds to mm:ss format
 microseconds_to_mmss() {
   local us="$1"
 
@@ -74,8 +63,6 @@ microseconds_to_mmss() {
   local seconds=$((us / 1000000))
   printf '%d:%02d' $((seconds / 60)) $((seconds % 60))
 }
-
-# Get track length in mm:ss
 get_track_length() {
   local us
   us="$(get_metadata 'mpris:length')"
@@ -86,8 +73,6 @@ get_track_length() {
     microseconds_to_mmss "$us"
   fi
 }
-
-# Get current position in mm:ss
 get_current_position() {
   local us
   local player
@@ -105,8 +90,6 @@ get_current_position() {
     microseconds_to_mmss "$us"
   fi
 }
-
-# Calculate progress percentage (0-100)
 calculate_progress_percent() {
   local pos_us length_us
   local player
@@ -127,8 +110,6 @@ calculate_progress_percent() {
     printf '0'
   fi
 }
-
-# Generate progress bar with Pango markup
 generate_progress_bar() {
   local percent
   percent="$(calculate_progress_percent)"
@@ -136,7 +117,6 @@ generate_progress_bar() {
   local current_status
   current_status="$(get_status)"
 
-  # Return empty bar if nothing is playing
   if [[ -z "$current_status" || "$current_status" == "Stopped" ]]; then
     local empty_bar=""
     for ((i = 0; i < BAR_LENGTH; i++)); do
@@ -146,15 +126,12 @@ generate_progress_bar() {
     return
   fi
 
-  # Treat 95%+ as 100% to handle players switching tracks early
   [[ $percent -ge 95 ]] && percent=100
 
-  # Calculate filled segments
   local progress=$((percent * BAR_LENGTH / 100))
   [[ $progress -gt $BAR_LENGTH ]] && progress=$BAR_LENGTH
   [[ $progress -lt 0 ]] && progress=0
 
-  # Build bar segments
   local bar_played=""
   local bar_remaining=""
 
@@ -166,23 +143,18 @@ generate_progress_bar() {
     bar_remaining+="$BAR_CHAR"
   done
 
-  # Generate Pango markup based on position
   if [[ $progress -eq $BAR_LENGTH ]]; then
-    # Track complete - handle at end
     printf '<span foreground="#%s">%s</span><span foreground="#ffffff99">%s</span>' \
       "$COLOR_PLAYED" "$bar_played" "$BAR_HANDLE"
   elif [[ $progress -eq 0 ]]; then
-    # Track just started - handle at beginning
     printf '<span foreground="#ffffff99">%s</span><span foreground="#%s">%s</span>' \
       "$BAR_HANDLE" "$COLOR_REMAINING" "${bar_remaining}"
   else
-    # In progress - played + handle + remaining
     printf '<span foreground="#%s">%s</span><span foreground="#ffffff99">%s</span><span foreground="#%s">%s</span>' \
       "$COLOR_PLAYED" "$bar_played" "$BAR_HANDLE" "$COLOR_REMAINING" "$bar_remaining"
   fi
 }
 
-# Download remote URL to cache
 download_to_cache() {
   local url="$1"
   local filename
@@ -195,21 +167,17 @@ download_to_cache() {
 
   printf '%s' "$output"
 }
-
-# Create square-cropped album art
 create_square_cover() {
   local input="$1"
   local basename
   basename="$(basename "$input")"
   local output="$CACHE_DIR/${basename%.*}_sq_${SQUARE_SIZE}.jpg"
 
-  # Return cached version if it exists and is newer
   if [[ -s "$output" && "$output" -nt "$input" ]]; then
     printf '%s' "$output"
     return
   fi
 
-  # Create square crop with ImageMagick
   if have convert; then
     convert "$input" -auto-orient -gravity center \
       -thumbnail "${SQUARE_SIZE}x${SQUARE_SIZE}^" \
@@ -217,11 +185,8 @@ create_square_cover() {
       -quality 90 "$output" && printf '%s' "$output" && return
   fi
 
-  # Fallback to original if ImageMagick unavailable
   printf '%s' "$input"
 }
-
-# Get path to square album art
 get_album_art_path() {
   local url
   url="$(get_metadata 'mpris:artUrl')"
@@ -253,8 +218,6 @@ get_album_art_path() {
 
   create_square_cover "$local_path"
 }
-
-# Get player status icon
 get_status_icon() {
   case "$(get_status | tr '[:upper:]' '[:lower:]')" in
   playing)
@@ -268,8 +231,6 @@ get_status_icon() {
     ;;
   esac
 }
-
-# Get active player name
 get_active_player() {
   local active_player=""
   local player
@@ -283,8 +244,6 @@ get_active_player() {
 
   printf '%s' "$active_player"
 }
-
-# Get formatted player name with icon
 get_player_display() {
   local player
   player="$(get_active_player)"
@@ -316,11 +275,6 @@ get_player_display() {
     ;;
   esac
 }
-
-# ============================================================================
-# Command-Line Interface
-# ============================================================================
-
 case "${1:-}" in
 --title)
   title="$(get_metadata 'xesam:title')"
