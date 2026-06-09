@@ -54,7 +54,6 @@
 }
 
 /* --- Sidebar & Layout --- */
-
 #navigator-toolbox,
 #zen-tabbox-wrapper,
 .sidebar-panel {
@@ -135,15 +134,15 @@ toolbarbutton#tabs-newtab-button {
 }
 
 .urlbarView-url {
-  color: var(--primary) !important;
+  color: var(--text) !important;
 }
 
 .urlbarView-favicon {
-  background-color: var(--base) !important;
+  background-color: transparent !important;
 }
 
 #urlbar-results {
-  background-color: var(--overlay) !important;
+  background-color: var(--base) !important;
   color: var(--text) !important;
 }
 
