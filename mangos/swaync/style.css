@@ -1,4 +1,4 @@
-@import url("/home/YOURUSERNAME!/.cache/wal/colors-swaync.css");
+@import url("/home/YOUR_USERNAME/.cache/wal/colors-swaync.css");
 
 * {
     font-family: "JetBrainsMono Nerd Font";
@@ -30,16 +30,23 @@ scrollbar {
     background: @background;
 }
 
+.notification-default-action:hover {
+    background: alpha(@accent-hover, 0.3);
+}
+
 .notification-background {
     padding: 2px;
     box-shadow: inset 2px 0 @accent;
 }
 
 .notification-group-icon {
-    -gtk-icon-transform: scale(0);
+    -gtk-icon-size: 0px;
 }
 
-.notification-group-header,
+.notification-group-header {
+    margin-left: -6px;
+    min-width: 100px;
+}
 .notification-group {
     background: transparent;
     border: none;
@@ -68,28 +75,76 @@ scrollbar {
 }
 
 .control-center-dnd {
-    background: alpha(@accent), 0.3);
+    background: transparent;
 }
 
-.control-center-dnd:hover {
-    background: alpha(@accent), 0.725);
+.widget-dnd slider {
+    background: @foreground;
+    border-radius: 2px;
+    margin: -1px;
+    min-height: 15px;
+    min-width: 15px;
 }
 
-.control-center-dnd:checked {
-    background: @accent;
+.widget-dnd > switch {
+    background: alpha(@accent, 0.2);
+    border-radius: 2px;
+    margin-right: 11px;
 }
 
-.control-center-dnd slider {
-    background: #ebebeb;
+.widget-dnd > switch:hover {
+    background: alpha(@accent, 0.4);
+}
+
+.widget-dnd > switch:checked {
+    background: alpha(@accent, 0.8);
+}
+
+.widget-dnd label {
+    font-size: 13px;
+    padding-top: 3px;
+    color: alpha(@foreground, 0.4);
+}
+
+.widget-dnd {
+    margin-top: -20px;
 }
 
 .control-center {
-    background: alpha(@background, 0.85);
+    background: alpha(@background, 0.77);
     border-radius: 0px;
 }
 
 .control-center-list {
     background: transparent;
+}
+
+.control-center-dnd switch,
+.control-center-dnd switch:hover,
+.control-center-dnd switch:checked,
+.control-center-dnd switch:focus,
+.control-center-dnd slider,
+.control-center-dnd slider:hover,
+.control-center-dnd slider:focus {
+    box-shadow: none;
+    outline: none;
+    -gtk-outline-radius: 0;
+}
+
+.control-center-list-placeholder image {
+    color: transparent;
+    -gtk-icon-size: 0;
+}
+
+.control-center-list-placeholder label {
+    padding-top: 6px;
+}
+
+.control-center-list-placeholder {
+    background-image: url("/home/YOUR_USERNAME/Downloads/5tiomx5hbbze1.webp");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 108px 108px;
 }
 
 button.circular {
@@ -100,7 +155,7 @@ button.circular {
 }
 
 button.circular:hover {
-    background: alpha(@accent-hover), 0.725);
+    background: alpha(@accent-hover, 0.725);
     border: none;
     border-radius: 0px;
     box-shadow: none;
@@ -119,10 +174,44 @@ button.circular:hover {
 }
 
 .widget-title button:hover {
-    background: alpha(@accent-hover), 0.3);
+    background: alpha(@accent-hover, 0.3);
     border-radius: 0px;
     border: none;
     box-shadow: none;
+}
+
+.widget-buttons-grid {
+    margin: 4px;
+}
+
+.widget-buttons-grid button {
+    border-radius: 0;
+    min-height: 50px;
+    background: alpha(@background, 0.5);
+}
+
+.widget-buttons-grid flowboxchild {
+    min-width: 89px;
+}
+
+.widget-buttons-grid flowboxchild:nth-child(2) label {
+    margin-right: 1px;
+}
+
+.widget-buttons-grid flowboxchild:nth-child(3) label {
+    margin-right: 1px;
+}
+
+.widget-buttons-grid flowboxchild:nth-child(4) label {
+    margin-right: 3px;
+}
+
+.widget-buttons-grid button label {
+    font-size: 18px;
+}
+
+.widget-buttons-grid button:hover {
+    background: alpha(@accent-hover, 0.3);
 }
 
 .notification-default-action {
@@ -131,6 +220,6 @@ button.circular:hover {
 }
 
 .notification-default-action:hover {
-    background: alpha(@accent-hover), 0.3);
+    background: alpha(@accent-hover, 0.3);
     border-radius: 0px;
 }
